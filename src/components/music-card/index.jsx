@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Flex,
   Image,
@@ -7,6 +8,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { FaPlay } from "react-icons/fa";
 import MotionBox from "../motion-box";
 const MusicCard = ({ data, isSelected, handleSelect }) => {
   const { album, artists, external_urls, name } = data;
@@ -39,8 +41,8 @@ const MusicCard = ({ data, isSelected, handleSelect }) => {
         bgColor: "#272727",
       }}
     >
-      <Flex boxSize={["80px", "125px"]}>
-        <Link isExternal href={album.external_urls.spotify}>
+      <Flex boxSize={["80px", "125px"]} pos="relative">
+        <Link href={data.uri}>
           <Image
             _groupHover={{ opacity: 0.7 }}
             fallback={<Skeleton boxSize={["80px", "125px"]} />}
@@ -48,6 +50,17 @@ const MusicCard = ({ data, isSelected, handleSelect }) => {
             src={album.images[1].url}
             alt={album.name}
           />
+          <Box
+            pos="absolute"
+            d="none"
+            _groupHover={{ d: "block" }}
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            fontSize="3xl"
+          >
+            <FaPlay />
+          </Box>
         </Link>
       </Flex>
       <Flex flex={1} flexDir="column" justifyContent="space-between">
